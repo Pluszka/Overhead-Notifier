@@ -1,6 +1,10 @@
 import requests
 from datetime import datetime
+from config import *
 
+
+MY_PASSWORD = password
+MY_EMAIL = login
 MY_LAT = 51.507351 # Your latitude
 MY_LONG = -0.127758 # Your longitude
 
@@ -10,8 +14,6 @@ data = response.json()
 
 iss_latitude = float(data["iss_position"]["latitude"])
 iss_longitude = float(data["iss_position"]["longitude"])
-
-#Your position is within +5 or -5 degrees of the ISS position.
 
 
 parameters = {
@@ -26,7 +28,9 @@ data = response.json()
 sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
 sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
-time_now = datetime.now()
+time_now = datetime.now().hour
+
+
 
 #If the ISS is close to my current position
 # and it is currently dark
