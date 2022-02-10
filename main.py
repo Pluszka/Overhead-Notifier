@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 from config import *
-
+import smtplib
 
 MY_PASSWORD = password
 MY_EMAIL = login
@@ -41,8 +41,12 @@ def check_time():
         return True
     return False
 
-if check_time():
-    print('night')
+if check_time() and check_position():
+    connection = smtplib.SMTP('smtp.gmail.com')
+    connection.starttls()
+    connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+    connection.sendmail(from_addr=MY_EMAIL, to_addrs='tte2stt@gmail.com',
+                        msg=f'Subject:Check the sky\n\n ISS ist right above you snd it\'s dark enough to see it.')
 
 #If the ISS is close to my current position
 # and it is currently dark
