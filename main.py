@@ -15,7 +15,6 @@ data = response.json()
 iss_latitude = float(data["iss_position"]["latitude"])
 iss_longitude = float(data["iss_position"]["longitude"])
 
-
 parameters = {
     "lat": MY_LAT,
     "lng": MY_LONG,
@@ -31,9 +30,8 @@ sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 time_now = datetime.now().hour
 
 def check_position():
-    if MY_LAT <= iss_latitude + 5 and MY_LAT >= iss_latitude - 5:
-        if MY_LONG <= iss_longitude and MY_LONG >= iss_longitude:
-            return True
+    if iss_latitude - 5 >= MY_LAT >= iss_latitude + 5 and iss_longitude - 5 >= MY_LONG >= iss_longitude + 5:
+        return True
     return False
 
 def check_time():
@@ -52,6 +50,3 @@ if check_time() and check_position():
 # and it is currently dark
 # Then send me an email to tell me to look up.
 # BONUS: run the code every 60 seconds.
-
-
-
