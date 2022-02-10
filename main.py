@@ -36,6 +36,13 @@ def check_position():
             return True
     return False
 
+def check_time():
+    if time_now > sunset or time_now > sunrise:
+        return True
+    return False
+
+if check_time():
+    print('night')
 
 #If the ISS is close to my current position
 # and it is currently dark
