@@ -30,6 +30,11 @@ sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
 time_now = datetime.now().hour
 
+def check_position():
+    if MY_LAT <= iss_latitude + 5 and MY_LAT >= iss_latitude - 5:
+        if MY_LONG <= iss_longitude and MY_LONG >= iss_longitude:
+            return True
+    return False
 
 
 #If the ISS is close to my current position
